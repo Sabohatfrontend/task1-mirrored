@@ -1,0 +1,27 @@
+.cards-lists {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+.card-item {
+  width: 300px;
+  padding: 1em;
+  box-shadow:
+    rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card-item:hover {
+  transform: translateY(-10px);
+}
+
+.card-item-text {
+  color: var(--brand-color);
+  font-weight: 500;
+}
