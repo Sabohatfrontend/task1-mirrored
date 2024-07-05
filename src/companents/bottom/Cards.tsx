@@ -9,7 +9,7 @@ class Cards extends Component<Props> {
   }
   render(): ReactNode {
     const booksLists = this.props.books.map((book) => {
-      return <CardItem book={book} />;
+      return <CardItem book={book} key={book.uid} />;
     });
     return <ul className="cards-lists">{booksLists}</ul>;
   }

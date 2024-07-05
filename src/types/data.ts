@@ -1,4 +1,4 @@
-export type BookType = {
+type BookType = {
   uid: string;
   title: string;
   publishedYear: number;
@@ -43,4 +43,10 @@ export type Props = {
 
 export type PropsBook = {
   book: BookType;
+};
+
+export type DataType = {
+  data: Props | null;
+  loading: boolean;
+  error: boolean;
 };

@@ -6,14 +6,8 @@ class CardItem extends Component<PropsBook> {
     super(props);
   }
   render(): ReactNode {
-    const {
-      title,
-      numberOfPages,
-      publishedDay,
-      publishedMonth,
-      publishedYear,
-    } = this.props.book;
-    const publishedDate = `${publishedDay.toString().padStart(2, '0')}.${publishedMonth.toString().padStart(2, '0')}.${publishedYear}`;
+    const { title, numberOfPages, publishedYear } = this.props.book;
+    const publishedDate = `${publishedYear}`;
 
     return (
       <li className="card-item">
@@ -22,7 +16,7 @@ class CardItem extends Component<PropsBook> {
           <span className="card-item-text">Page number:</span> {numberOfPages}
         </p>
         <p>
-          <span className="card-item-text">Published Date:</span>{' '}
+          <span className="card-item-text">Published Year:</span>{' '}
           {publishedDate}
         </p>
       </li>
