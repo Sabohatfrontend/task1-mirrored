@@ -1,7 +1,12 @@
 import { Component, ReactNode } from 'react';
 import { PreviousSearchTerm } from '../constants';
+import { GetDataType } from '../../types/data';
 
-class SearchForm extends Component {
+class SearchForm extends Component<GetDataType> {
+  constructor(props: GetDataType) {
+    super(props);
+  }
+
   state = {
     value: this.getPreviousSearchTerm(),
   };
@@ -18,6 +23,8 @@ class SearchForm extends Component {
 
   handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
+    const { getData } = this.props;
+    getData(`http://stapi.co/api/v1/rest/book/search?title=${this.state}`)
   };
 
   render(): ReactNode {

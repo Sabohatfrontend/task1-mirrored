@@ -1,43 +1,51 @@
 import './App.css';
 
 import { Component, ReactNode } from 'react';
-import DataContext from './context/DataContext';
 import MainPage from './pages/MainPage';
 import { DataType } from './types/data';
+import { Header } from './companents';
+import ErrorBoundary from './companents/errorBoundry/ErrorBoundry';
 
 const initialValue: DataType = {
   data: null,
   loading: false,
   error: false,
+  total: 0,
 };
 
 class App extends Component {
   state = initialValue;
+
+  handleState(newState: DataType) {
+    this.setState((prevState) => {
+      return {
+        ...prevState,
+        ...newState
+      };
+    });
+  }
 
   componentDidMount(): void {
     this.getData('http://stapi.co/api/v1/rest/book/search');
   }
 
   getData(url: string) {
-    this.setState({
-      data: null,
+    this.handleState({
       loading: true,
-      error: false,
     });
-
+    console.log(this.state);
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        this.setState({
+        this.handleState({
           data: data,
           loading: false,
           error: false,
+          total: data.page.totalElements,
         });
       })
-      .catch((error) => {
-        console.log(error);
-        this.setState({
-          data: null,
+      .catch(() => {
+        this.handleState({
           loading: false,
           error: true,
         });
@@ -45,17 +53,16 @@ class App extends Component {
   }
 
   render(): ReactNode {
-    if (this.state.loading) return <div>Loading...</div>;
-
-    if (this.state.error) return <div>Something went wrong!!!</div>;
-
-    return this.state.data ? (
-      <DataContext.Provider value={this.state.data}>
-        <MainPage />
-      </DataContext.Provider>
-    ) : (
-      <div>Nothing found!!!</div>
+    return (
+      <ErrorBoundary>
+        <Header getData={() => this.getData} />
+        <main className="main-content">
+          <MainPage value={this.state} />
+        </main>
+      </ErrorBoundary>
     );
+
+
   }
 }
 

@@ -1,10 +1,10 @@
 import { Component, ReactNode } from 'react';
 import './Cards.css';
-import { Props } from '../../types/data';
+import { BooksType } from '../../types/data';
 import CardItem from './CardItem';
 
-class Cards extends Component<Props> {
-  constructor(props: Props) {
+class Cards extends Component<BooksType> {
+  constructor(props: BooksType) {
     super(props);
   }
   render(): ReactNode {

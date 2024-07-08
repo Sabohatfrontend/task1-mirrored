@@ -37,16 +37,28 @@ type BookType = {
   bookCollections?: [[]];
 };
 
-export type Props = {
+export type BooksType = {
   books: BookType[];
-};
+}
 
 export type PropsBook = {
   book: BookType;
 };
 
 export type DataType = {
-  data: Props | null;
-  loading: boolean;
-  error: boolean;
+  data?: BooksType | null;
+  loading?: boolean;
+  error?: boolean;
+  total?: number;
 };
+
+export type PropsType = {
+  value: DataType;
+};
+
+export interface GetDataType {
+  getData: (url: string) => void;
+};
+
+
+
