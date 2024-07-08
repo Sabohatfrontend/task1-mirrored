@@ -26,7 +26,7 @@ class App extends Component {
   }
 
   componentDidMount(): void {
-    this.getData('http://stapi.co/api/v1/rest/book/search');
+    this.getData('https://stapi.co/api/v1/rest/book/search');
   }
 
   getData(url: string) {
