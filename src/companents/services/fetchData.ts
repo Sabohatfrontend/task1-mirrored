@@ -3,7 +3,7 @@ const PAGE_SIZE = 20;
 
 const getURL = (pageNumber: number) => {
   return `${ENDPOINT}?pageNumber=${pageNumber}&pageSize=${PAGE_SIZE}`;
-}
+};
 
 export const fetchData = async (pageNumber: number, searchTerm: string) => {
   const response = await fetch(getURL(pageNumber), {
@@ -12,7 +12,5 @@ export const fetchData = async (pageNumber: number, searchTerm: string) => {
     body: new URLSearchParams({ title: searchTerm }),
   });
 
-
   return response.json();
-}
-
+};

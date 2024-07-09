@@ -39,7 +39,7 @@ type BookType = {
 
 export type BooksType = {
   books: BookType[];
-}
+};
 
 export type PropsBook = {
   book: BookType;
@@ -50,6 +50,9 @@ export type DataType = {
   loading?: boolean;
   error?: boolean;
   total?: number;
+  page?: number;
+  totalPages?: number;
+  searchTerm?: string;
 };
 
 export type PropsType = {
@@ -60,5 +63,6 @@ export interface GetDataType {
   getData: (pageNumber: number, searchTerm: string) => void;
 }
 
-
-
+export type PaginationType = {
+  pageNumber: number;
+};

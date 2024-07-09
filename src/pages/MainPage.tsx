@@ -16,13 +16,12 @@ class MainPage extends Component<PropsType> {
 
     if (error) return <div>Something went wrong!!!</div>;
 
-    if (!data) return <div>Nothing found!!!</div>
+    if (!data) return <div>Nothing found!!!</div>;
 
     return (
       <>
         <p>Total: {total}</p>
         <Cards books={data.books} />
-
       </>
     );
   }

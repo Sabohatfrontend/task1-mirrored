@@ -7,12 +7,16 @@ import { Header } from './companents';
 import ErrorBoundary from './companents/errorBoundry/ErrorBoundry';
 import { fetchData } from './companents/services/fetchData';
 import { PreviousSearchTerm } from './companents/constants';
+import Pagination from './companents/pagination/Pagination';
 
 const initialValue: DataType = {
   data: null,
   loading: false,
   error: false,
   total: 0,
+  page: 0,
+  totalPages: 0,
+  searchTerm: '',
 };
 
 class App extends Component {
@@ -22,13 +26,13 @@ class App extends Component {
     this.setState((prevState) => {
       return {
         ...prevState,
-        ...newState
+        ...newState,
       };
     });
   }
 
   componentDidMount(): void {
-    this.getData(0)
+    this.getData(0);
   }
 
   getData = async (pageNumber: number = 0, searchTerm: string = '') => {
@@ -42,17 +46,18 @@ class App extends Component {
           loading: false,
           error: false,
           total: data.page.totalElements,
+          totalPages: data.page.totalPages,
+          searchTerm: searchTerm,
         });
-
         localStorage.setItem(PreviousSearchTerm, searchTerm);
       })
       .catch(() => {
         this.handleState({
           loading: false,
           error: true,
-        })
+        });
       });
-  }
+  };
 
   render(): ReactNode {
     return (
@@ -61,10 +66,13 @@ class App extends Component {
         <main className="main-content">
           <MainPage value={this.state} />
         </main>
-      </ErrorBoundary >
+        <Pagination
+          getData={this.getData}
+          totalPages={this.state.totalPages || 0}
+          searchTerm={this.state.searchTerm || ''}
+        />
+      </ErrorBoundary>
     );
-
-
   }
 }
 
