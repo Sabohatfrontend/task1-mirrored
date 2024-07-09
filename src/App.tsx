@@ -6,6 +6,7 @@ import { DataType } from './types/data';
 import { Header } from './companents';
 import ErrorBoundary from './companents/errorBoundry/ErrorBoundry';
 import { fetchData } from './companents/services/fetchData';
+import { PreviousSearchTerm } from './companents/constants';
 
 const initialValue: DataType = {
   data: null,
@@ -41,7 +42,9 @@ class App extends Component {
           loading: false,
           error: false,
           total: data.page.totalElements,
-        })
+        });
+
+        localStorage.setItem(PreviousSearchTerm, searchTerm);
       })
       .catch(() => {
         this.handleState({
