@@ -57,7 +57,7 @@ export type PropsType = {
 };
 
 export interface GetDataType {
-  getData: (url: string) => void;
+  getData: (pageNumber: number, searchTerm: string) => void;
 }
 
 

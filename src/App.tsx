@@ -5,6 +5,7 @@ import MainPage from './pages/MainPage';
 import { DataType } from './types/data';
 import { Header } from './companents';
 import ErrorBoundary from './companents/errorBoundry/ErrorBoundry';
+import { fetchData } from './companents/services/fetchData';
 
 const initialValue: DataType = {
   data: null,
@@ -26,40 +27,38 @@ class App extends Component {
   }
 
   componentDidMount(): void {
-    this.getData('https://stapi.co/api/v1/rest/book/search');
+    this.getData(0)
   }
 
-  getData(url: string) {
+  getData = async (pageNumber: number = 0, searchTerm: string = '') => {
     this.handleState({
       loading: true,
     });
-    console.log(this.state);
-    fetch(url)
-      .then((res) => res.json())
+    await fetchData(pageNumber, searchTerm)
       .then((data) => {
         this.handleState({
           data: data,
           loading: false,
           error: false,
           total: data.page.totalElements,
-        });
+        })
       })
       .catch(() => {
         this.handleState({
           loading: false,
           error: true,
-        });
+        })
       });
   }
 
   render(): ReactNode {
     return (
       <ErrorBoundary>
-        <Header getData={() => this.getData} />
+        <Header getData={this.getData} />
         <main className="main-content">
           <MainPage value={this.state} />
         </main>
-      </ErrorBoundary>
+      </ErrorBoundary >
     );
 
 

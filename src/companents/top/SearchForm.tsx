@@ -24,7 +24,7 @@ class SearchForm extends Component<GetDataType> {
   handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     const { getData } = this.props;
-    getData(`http://stapi.co/api/v1/rest/book/search?title=${this.state}`)
+    getData(0, this.state.value);
   };
 
   render(): ReactNode {
