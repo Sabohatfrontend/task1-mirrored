@@ -3,11 +3,13 @@ import './App.css';
 import { Component, ReactNode } from 'react';
 import MainPage from './pages/MainPage';
 import { DataType } from './types/data';
-import { Header } from './companents';
-import ErrorBoundary from './companents/errorBoundry/ErrorBoundry';
+import {
+  Header,
+  Pagination,
+  ErrorBoundary,
+  PreviousSearchTerm,
+} from './companents';
 import { fetchData } from './companents/services/fetchData';
-import { PreviousSearchTerm } from './companents/constants';
-import Pagination from './companents/pagination/Pagination';
 
 const initialValue: DataType = {
   data: null,

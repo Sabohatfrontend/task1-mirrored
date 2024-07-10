@@ -1,4 +1,4 @@
-import { Component, ErrorInfo, ReactNode } from 'react';
+import { Component, ErrorInfo, MouseEvent, ReactNode } from 'react';
 import './ErrorBoundry.css';
 
 interface Props {
@@ -22,11 +22,22 @@ class ErrorBoundary extends Component<Props, State> {
     console.error('Uncaught error:', error, errorInfo);
   }
 
+  private handleClose = (): void => this.setState({ hasError: false });
+
   public render() {
     if (this.state.hasError) {
       return (
-        <div className="error-container">
+        <div
+          className="error-container"
+          role="presentation"
+          onMouseDown={(e: MouseEvent<HTMLDivElement>) => {
+            if (e.target === e.currentTarget) this.handleClose();
+          }}
+        >
           <h2 className="error-text">Sorry.. there was an error</h2>
+          <button className="close-btn" onClick={this.handleClose}>
+            Close
+          </button>
         </div>
       );
     }
