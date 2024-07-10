@@ -11,6 +11,8 @@ import {
 } from './companents';
 import { fetchData } from './companents/services/fetchData';
 
+const searchTerm = localStorage.getItem(PreviousSearchTerm) || '';
+
 const initialValue: DataType = {
   data: null,
   loading: false,
@@ -18,7 +20,7 @@ const initialValue: DataType = {
   total: 0,
   page: 0,
   totalPages: 0,
-  searchTerm: '',
+  searchTerm: searchTerm,
 };
 
 class App extends Component {
@@ -34,7 +36,7 @@ class App extends Component {
   }
 
   componentDidMount(): void {
-    this.getData(0);
+    this.getData(0, this.state.searchTerm);
   }
 
   getData = async (pageNumber: number = 0, searchTerm: string = '') => {
